@@ -1,2 +1,2 @@
-# Samsung Electro Mechanics PoC Demo [Backend]
+# SK Siltron PoC Demo [Backend]
 Custom catalog portal view
