@@ -13,7 +13,7 @@ const Token = process.env.TOKEN
 const uname = process.env.USERNAME
 const password = process.env.PASSWORD
 
-
+//Don't use the LoadData for demo
 const LoadData = async () => {
     try{
         const url = cp4durl + `icp4d-api/v1/authorize`
@@ -59,9 +59,29 @@ app.get("/getcatalogs", async (req, res) => {
     res.send(response)
 })
 
+app.get("/getcataloginfo", async (req, res) => {
+    console.log("/getcataloginfo endpoint called")
+    const url = cp4durl + `v2/catalogs/64c25f35-eefb-4172-b6c3-38d8492fb4bb`
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + Token
+        }
+    })
+    .then(res => res.text())
+    .catch(e => {
+        console.error({
+            "message": "Error",
+            error: e,
+        })
+        })
+    console.log("RESPONSE: ", response)
+    res.send(response)
+})
+
 app.get("/getassetlist", async (req, res)=> {
     console.log("Getting asset list...")
-    const url = cp4durl + `v2/asset_types/asset/search?catalog_id=e915f391-8dc7-4904-9e22-3c2c7614ac4e`
+    const url = cp4durl + `v2/asset_types/asset/search?catalog_id=64c25f35-eefb-4172-b6c3-38d8492fb4bb`
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -87,7 +107,7 @@ app.get("/getassetlist", async (req, res)=> {
 
 app.get("/getassetmeta", async (req, res)=> {
     console.log("Getting asset's meta data...")
-    const url = cp4durl + `v2/assets/d5b05d69-95af-43df-bf29-1cc1e7b68dad?catalog_id=e915f391-8dc7-4904-9e22-3c2c7614ac4e`
+    const url = cp4durl + `v2/assets/85bdfaed-d1c3-4d27-b508-696a72dbc732?catalog_id=64c25f35-eefb-4172-b6c3-38d8492fb4bb`
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -107,7 +127,7 @@ app.get("/getassetmeta", async (req, res)=> {
 
 app.get("/getassetreview", async (req, res)=> {
     console.log("Getting asset's review...")
-    const url = cp4durl + `v2/assets/d5b05d69-95af-43df-bf29-1cc1e7b68dad/ratings?catalog_id=e915f391-8dc7-4904-9e22-3c2c7614ac4e`
+    const url = cp4durl + `v2/assets/85bdfaed-d1c3-4d27-b508-696a72dbc732/ratings?catalog_id=64c25f35-eefb-4172-b6c3-38d8492fb4bb`
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -127,7 +147,7 @@ app.get("/getassetreview", async (req, res)=> {
 
 app.get("/getconnection", async (req, res)=> {
     console.log("Getting asset's connection...")
-    const url = cp4durl + `/v2/connections/6cbf2c9a-fda9-497e-bbff-e259318074eb?catalog_id=e915f391-8dc7-4904-9e22-3c2c7614ac4e`
+    const url = cp4durl + `/v2/connections/791fc335-aa6c-4820-80d4-67f1bb2bec3e?catalog_id=64c25f35-eefb-4172-b6c3-38d8492fb4bb`
     const response = await fetch(url, {
         method: 'GET',
         headers: {
