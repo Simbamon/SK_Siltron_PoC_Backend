@@ -376,7 +376,7 @@ app.get("/getassetreview", async (req, res)=> {
 
 app.get("/getconnection", async (req, res)=> {
     console.log("Getting asset's connection...")
-    const url = cp4durl + `/v2/connections/791fc335-aa6c-4820-80d4-67f1bb2bec3e?catalog_id=64c25f35-eefb-4172-b6c3-38d8492fb4bb`
+    const url = cp4durl + `v2/connections/791fc335-aa6c-4820-80d4-67f1bb2bec3e?catalog_id=64c25f35-eefb-4172-b6c3-38d8492fb4bb`
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -393,6 +393,28 @@ app.get("/getconnection", async (req, res)=> {
     console.log("RESPONSE: ", response)
     res.send(response)
 })
+
+
+app.get("/getassetdata", async (req, res)=> {
+    console.log("Getting asset's review...")
+    const url = cp4durl + `v2/connections/assets/85bdfaed-d1c3-4d27-b508-696a72dbc732?catalog_id=64c25f35-eefb-4172-b6c3-38d8492fb4bb&fetch=data`
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + Token
+        }
+    })
+    .then(res => res.text())
+    .catch(e => {
+        console.error({
+            "message": "Error",
+            error: e,
+        })
+        })
+    console.log("RESPONSE: ", response)
+    res.send(response)
+})
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
