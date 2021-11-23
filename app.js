@@ -3,7 +3,15 @@ const app = express()
 const port = 5001
 const path = require('path')
 const fetch = require('node-fetch')
+// const exec = require('child_process').execFile;
 
+// const localExecute =function(){
+//     console.log("execFile started")
+//     exec("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", function(err, data) {  
+//         console.log(err)
+//         console.log(data.toString());                       
+//     });  
+// }
 
 require('dotenv').config({ path: path.resolve(__dirname, './.env') })
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
@@ -38,6 +46,10 @@ const password = process.env.PASSWORD
 //         console.error(err)
 //     }
 // }
+
+// app.get("/start", async(req, res) => {
+//     localExecute()
+// })
 
 app.get("/getcatalogs", async (req, res) => {
     console.log("/getcatalog endpoint called")
